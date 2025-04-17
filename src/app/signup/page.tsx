@@ -156,7 +156,7 @@ const Signup = () => {
             <button
 
                 onClick={signupPro}
-              className="w-full btn flex items-center  bg-[#F05922]justify-center px-4 py-2.5 border border-transparent rounded-lg shadow-sm text-white bg-custom-orange hover:bg-custom-orange/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-orange transition-colors duration-200"
+              className="w-full btn flex items-center  bg-[#F05922] justify-center px-4 py-2.5 border border-transparent rounded-lg shadow-sm text-white bg-custom-orange hover:bg-custom-orange/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-orange transition-colors duration-200"
             >
               Sign up
             </button>

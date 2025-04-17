@@ -11,7 +11,7 @@ const AboutPage = () => {
           <Image 
             width={200}
             height={200}
-            src="https://source.unsplash.com/random/1920x1080?sports,team"
+            src="/3.png"
             alt="About Us"
             className="w-full h-full object-cover opacity-30"
           />

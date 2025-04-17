@@ -68,10 +68,10 @@ const NavBar = () => {
                   <a href="/live">STREAMS</a>
                 </li>
                 <li>
-                  <Link href="/contact">Contact</Link>
+                  <Link href="/contact">CONTACTS</Link>
                 </li>
                 <li>
-                  <Link href="/about">About</Link>
+                  <Link href="/about">ABOUT</Link>
                 </li>
               </ul>
             </div>
@@ -88,10 +88,10 @@ const NavBar = () => {
                   <a href="/stream">STREAMS</a>
               </li>
               <li>
-                <Link href="/contact">Contact</Link>
+                <Link href="/contact">CONTACTS</Link>
               </li>
               <li>
-                <Link href="/about">About</Link>
+                <Link href="/about">ABOUT</Link>
               </li>
             </ul>
           </div>

@@ -49,9 +49,9 @@ const Page = () => {
           <Image
             width={200}
             height={200}
-            src="/2.png"
+            src="/3.png"
             alt="Sports"
-            className="w-[1000px] h-full  opacity-50"
+            className="w-[1000px] h-full  opacity-50 "
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent" />
         </div>
@@ -186,7 +186,7 @@ const Page = () => {
             height={200}
               src="/2.png"
               alt="About"
-              className="rounded-2xl w-[500px]"
+              className="rounded-2xl w-[500px] "
             />
             <div className="absolute -bottom-6 -right-6 bg-custom-orange p-6 rounded-2xl">
               <div className="text-4xl font-bold">10M+</div>

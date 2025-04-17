@@ -5,13 +5,13 @@ import Image from 'next/image';
 const ContactPage = () => {
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
-      {/* Hero Section */}
+   
       <section className="relative h-[40vh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
           height={200}
           width={200}
-            src="https://source.unsplash.com/random/1920x1080?stadium,sports"
+            src="/3.png"
             alt="Contact"
             className="w-full h-full object-cover opacity-30"
           />
@@ -27,10 +27,10 @@ const ContactPage = () => {
         </div>
       </section>
 
-      {/* Contact Content */}
+
       <section className="max-w-7xl mx-auto py-16 px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+
           <div className="bg-zinc-900 p-8 rounded-2xl">
             <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
             <form className="space-y-6">
@@ -78,7 +78,7 @@ const ContactPage = () => {
             </form>
           </div>
 
-          {/* Contact Information */}
+
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
@@ -89,8 +89,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email Us</h3>
-                    <p className="text-gray-300">support@sporttv.com</p>
-                    <p className="text-gray-300">business@sporttv.com</p>
+                    <p className="text-gray-300">djanithak@gmail.com</p>
+                    <p className="text-gray-300">dinethjanitha@outlook.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -99,8 +99,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Call Us</h3>
-                    <p className="text-gray-300">+1 (555) 123-4567</p>
-                    <p className="text-gray-300">+1 (555) 987-6543</p>
+                    <p className="text-gray-300">+94719422044</p>
+                    <p className="text-gray-300">+94719422044</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -110,8 +110,8 @@ const ContactPage = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Location</h3>
                     <p className="text-gray-300">
-                      123 Sport Street, Stadium District<br />
-                      New York, NY 10001
+                      Matara, Galle Road<br />
+                      Sri Lanka, 81400
                     </p>
                   </div>
                 </div>
@@ -128,7 +128,6 @@ const ContactPage = () => {
               </div>
             </div>
 
-            {/* Social Media */}
             <div>
               <h2 className="text-2xl font-bold mb-6">Follow Us</h2>
               <div className="flex gap-4">
