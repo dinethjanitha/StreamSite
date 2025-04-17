@@ -6,6 +6,7 @@ import SuccessMzg from '../components/SuccessMzg';
 import ErrorMzg from '../components/ErrorMzg';
 import { useRouter } from 'next/navigation';
 import  {jwtDecode} from 'jwt-decode';
+import { CustomJwtPayload } from '@/types/jwt';
 
 const Page = () => {
 
@@ -32,7 +33,7 @@ const Page = () => {
 
 
         localStorage.setItem("token" , response.data.token)
-        const decode = jwtDecode(response.data.token);
+        const decode = jwtDecode<CustomJwtPayload>(response.data.token);
         console.log(decode)
         localStorage.setItem("username" , decode.name )
 
