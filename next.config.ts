@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     domains: [
       "  http://localhost:3005",
       "img.daisyui.com",
-      "https://streamback-production.up.railway.app/",
+      "https://streamback-production.up.railway.app",
       "st3.depositphotos.com",
       "localhost",
       "unpkg.com",
