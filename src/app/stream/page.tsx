@@ -1,11 +1,69 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Trophy, FolderRoot as Football, ShoppingBasket as Basketball, Baseline as Baseball, Tent as Tennis, Ticket as Cricket, Timer, TrendingUp, Eye, Users } from 'lucide-react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-const page = () => {
+interface StreamProp {
+    _id : string,
+    thumbnail : string,
+    VideoLink : string,
+    description : string,
+    catagory : string,
+    status : string,
+    title : string
+  }
+  
+
+const Page = () => {
+
+    const router = useRouter();
+    const [streams , setStreams] = useState<StreamProp[]>([]);
+    const [streamsAll , setStreamsAll] = useState<StreamProp[]>([]);
+
+
+    const fetchStrems = async () => {
+      try{
+        const response = await axios.get("http://localhost:3005/api/v1/stream")
+  
+        console.log(response.data)
+  
+        setStreams(response.data)
+        setStreamsAll(response.data)
+      }catch(error){
+        console.log(error)
+      }
+    }
+  
+    useEffect(() => {
+      fetchStrems();
+    },[])
+  
+    // console.log("streamsdsd[0]")
+  
+      const handleChange = ( e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+
+        const searchStream = streams.filter((item) => item._id.includes(val) ||
+                                item.title.includes(val) || item.status.includes(val))
+
+        setStreams(searchStream);
+
+        if(streams.length == 0){
+            setStreams(streamsAll)
+        }
+
+        if(val == ""){
+            setStreams(streamsAll)
+        }
+        
+    }
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white p-6">
       <div className="max-w-7xl mx-auto space-y-8">
-        
+        <input type="text" className=' input w-full' onChange={handleChange} placeholder=' Search' />
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold tracking-tight">
@@ -17,24 +75,26 @@ const page = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="group relative overflow-hidden rounded-2xl bg-zinc-900 hover:bg-zinc-800 transition-all duration-300">
+            {streams.map((item , key) => (
+              <div onClick={() => {router.push(`/watch/${item._id}`)}} key={key} className="group relative overflow-hidden rounded-2xl bg-zinc-900 hover:bg-zinc-800 transition-all duration-300">
                 <div className="aspect-video w-full overflow-hidden">
-                  <img 
-                    src="/2.png"
+                  <Image
+                  width={200}
+                  height={200}
+                    src={item.thumbnail}
                     alt="Event"
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute top-3 left-3 bg-red-500 text-xs font-semibold px-2 py-1 rounded-full">
-                    LIVE
+                  {item.status}
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">Championship Finals 2024</h3>
+                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
                   <div className="flex items-center justify-between text-sm text-gray-400">
                     <div className="flex items-center gap-2">
                       <Users size={16} />
-                      <span>24.5K viewers</span>
+                      <span>{item.description}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Timer size={16} />
@@ -169,4 +229,4 @@ const page = () => {
   );
 }
 
-export default page;
+export default Page;

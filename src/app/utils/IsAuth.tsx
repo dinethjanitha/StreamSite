@@ -1,21 +1,16 @@
 "use client"
 import { jwtDecode } from 'jwt-decode'
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react'
 
 const IsAuth = () => {
 
-    const [token , setToken] = useState<string | null>(null);
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        setToken(token);
-    },[])
+    const token = localStorage.getItem("token")
 
     if(!token){
         return false
     }
 
-    console.log("token")
+    console.log("token=============")
     console.log(token)
 
     try{

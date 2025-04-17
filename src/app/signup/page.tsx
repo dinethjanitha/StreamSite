@@ -20,7 +20,7 @@ const Signup = () => {
     }
 
     try{
-        const response = await axios.post("http://localhost:3005/api/v1/regi" , data)
+        const response = await axios.post("https://streamback-production.up.railway.app/api/v1/regi" , data)
         console.log(response.data)
         setSuccess(true)
         

@@ -1,13 +1,54 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Play, Trophy, Users, Timer, TrendingUp, ArrowRight } from 'lucide-react';
+import axios from 'axios';
+
+interface StreamProp {
+  thumbnail : string,
+  VideoLink : string,
+  description : string,
+  catagory : string,
+  status : string,
+  title : string
+}
 
 const Page = () => {
+
+  const [streams , setStreams] = useState<StreamProp[]>([]);
+
+  const fetchStrems = async () => {
+    try{
+      const response = await axios.get("https://streamback-production.up.railway.app/api/v1/stream")
+
+      console.log(response.data)
+
+      setStreams(response.data)
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchStrems();
+  },[])
+
+  // console.log("streamsdsd[0]")
+
+  const live = streams.filter((stream) => stream.status == "live")
+  const featured = streams.filter((stream) => stream.status == "featured")
+  const basketball = streams.filter((stream) => stream.catagory == "basketball")
+
+  // console.log(live[0].thumbnail)
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
 
       <section className="relative h-[80vh] overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
+            width={200}
+            height={200}
             src="/2.png"
             alt="Sports"
             className="w-full h-full  opacity-50"
@@ -46,9 +87,13 @@ const Page = () => {
                 View All <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-            <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
-              <img
-                src="https://source.unsplash.com/random/800x600?basketball,match"
+            {
+              live.length > 0 && (
+                <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
+              <Image
+              width={200}
+              height={200}
+                src={live[0].thumbnail}
                 alt="Live Match"
                 className="w-full aspect-video object-cover transform group-hover:scale-105 transition-transform duration-300"
               />
@@ -56,12 +101,14 @@ const Page = () => {
               <div className="absolute bottom-0 p-4 w-full">
                 <div className="flex items-center gap-2 text-sm text-custom-orange font-semibold mb-2">
                   <Users className="w-4 h-4" />
-                  <span>24.5K watching</span>
+                  {/* <span>24.5K watching</span> */}
                 </div>
-                <h3 className="text-xl font-bold mb-1">TEAM A vs TEAM B</h3>
-                <p className="text-gray-300">Quarter Finals • Group A</p>
+                <h3 className="text-xl font-bold mb-1">{live[0].title}</h3>
+                <p className="text-gray-300">{live[0].description}</p>
               </div>
             </div>
+              )
+            }
           </div>
 
 
@@ -75,9 +122,13 @@ const Page = () => {
                 More <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-            <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
-              <img
-                src="https://source.unsplash.com/random/800x600?sports,stadium"
+           {
+            featured.length > 0 && (
+              <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
+              <Image
+              width={200}
+              height={200}
+                src={featured[0].thumbnail}
                 alt="Featured"
                 className="w-full aspect-video object-cover transform group-hover:scale-105 transition-transform duration-300"
               />
@@ -90,6 +141,8 @@ const Page = () => {
                 <h3 className="text-xl font-bold">Sport Center</h3>
               </div>
             </div>
+            )
+           }
           </div>
 
 
@@ -100,9 +153,13 @@ const Page = () => {
                 All Games <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-            <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
-              <img
-                src="https://source.unsplash.com/random/800x600?basketball,game"
+            {
+              basketball.length > 0 && (
+                <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
+              <Image
+              width={200}
+              height={200}
+                src={basketball[0].thumbnail}
                 alt="Basketball"
                 className="w-full aspect-video object-cover transform group-hover:scale-105 transition-transform duration-300"
               />
@@ -110,11 +167,13 @@ const Page = () => {
               <div className="absolute bottom-0 p-4">
                 <div className="flex items-center gap-2 text-sm text-custom-orange font-semibold mb-2">
                   <Timer className="w-4 h-4" />
-                  <span>Starting in 2h</span>
+                  <span>{basketball[0].status.toUpperCase()}</span>
                 </div>
                 <h3 className="text-xl font-bold">LEAGUE MATCH</h3>
               </div>
             </div>
+              )
+            }
           </div>
         </div>
       </section>
@@ -122,8 +181,10 @@ const Page = () => {
       <section className="max-w-7xl mx-auto py-16 px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
-            <img
-              src="https://source.unsplash.com/random/800x600?sports,broadcasting"
+            <Image
+            width={200}
+            height={200}
+              src="/2.png"
               alt="About"
               className="rounded-2xl"
             />

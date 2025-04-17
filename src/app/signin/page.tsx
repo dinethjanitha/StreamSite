@@ -5,6 +5,7 @@ import axios from 'axios';
 import SuccessMzg from '../components/SuccessMzg';
 import ErrorMzg from '../components/ErrorMzg';
 import { useRouter } from 'next/navigation';
+import  {jwtDecode} from 'jwt-decode';
 
 const Page = () => {
 
@@ -24,12 +25,16 @@ const Page = () => {
     }
 
     try{
-        const response = await axios.post("http://localhost:3005/api/v1/signin" , data)
+        const response = await axios.post("https://streamback-production.up.railway.app/api/v1/signin" , data)
 
         console.log(response.data)
 
 
+
         localStorage.setItem("token" , response.data.token)
+        const decode = jwtDecode(response.data.token);
+        console.log(decode)
+        localStorage.setItem("username" , decode.name )
 
         setSuccess(true)
 

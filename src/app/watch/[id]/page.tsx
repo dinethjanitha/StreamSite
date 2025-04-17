@@ -1,30 +1,67 @@
-import React from 'react';
-import { ThumbsUp, ThumbsDown, Share2, Send, Users, MessageSquare, Trophy, Timer, Eye } from 'lucide-react';
+import React from "react";
+import {
+  ThumbsUp,
+  ThumbsDown,
+  Share2,
+  Send,
+  Users,
+  MessageSquare,
+  Trophy,
+  Timer,
+  Eye,
+} from "lucide-react";
+import Image from "next/image";
 
 interface Props {
-  params: {
-    id: Promise<string>
-  }
+  params: Promise<{id: string }>;
 }
 
 const Page = async ({ params }: Props) => {
-  const id = (await params).id;
+  const id  = (await params).id;
+
+  // Fetch stream data from the API
+  const fetchStream = async (id: string) => {
+    try {
+      const response = await fetch(`https://streamback-production.up.railway.app/api/v1/stream/${id}`);
+      const data = await response.json();
+      return data.data.stream;
+    } catch (error) {
+      console.error("Error fetching stream:", error);
+      return null;
+    }
+  };
+
+  const stream = await fetchStream(id);
+
+  if (!stream) {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-white p-6 flex items-center justify-center">
+        <h1 className="text-2xl font-bold">Stream not found</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Main Content */}
           <div className="lg:col-span-9 space-y-4">
-            {/* Video Player */}
             <div className="aspect-video w-full bg-zinc-900 rounded-2xl overflow-hidden">
-              <video className="w-full h-full object-cover" />
+              <iframe
+                width="954"
+                height="537"
+                src={stream.VideoLink.replace("watch?v=", "embed/")}
+                title={stream.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
             </div>
 
             {/* Stream Info */}
             <div className="space-y-4">
-              <h1 className="text-2xl font-bold">{id}</h1>
-              
+              <h1 className="text-2xl font-bold">{stream.title}</h1>
+              <p className="text-gray-400">{stream.description}</p>
+
               {/* Stream Stats */}
               <div className="flex items-center gap-4 text-gray-400 text-sm">
                 <div className="flex items-center gap-2">
@@ -32,7 +69,7 @@ const Page = async ({ params }: Props) => {
                   <span>24.5K viewers</span>
                 </div>
                 <span>•</span>
-                <span>Live for 2:30:45</span>
+                <span>Status: {stream.status.toUpperCase()}</span>
               </div>
 
               {/* Actions */}
@@ -96,7 +133,9 @@ const Page = async ({ params }: Props) => {
                     <div className="w-8 h-8 rounded-full bg-zinc-800" />
                     <div>
                       <p className="text-sm">
-                        <span className="font-medium text-custom-orange">User {item}</span>
+                        <span className="font-medium text-custom-orange">
+                          User {item}
+                        </span>
                         <span className="text-gray-400 ml-2">Great match!</span>
                       </p>
                     </div>
@@ -121,13 +160,15 @@ const Page = async ({ params }: Props) => {
             <div className="bg-zinc-900 rounded-2xl p-4">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <Eye className="w-5 h-5 text-custom-orange" />
-                Today's Streams
+                Today &apos;s Streams
               </h3>
               <div className="space-y-4">
                 {[1, 2, 3].map((item) => (
                   <div key={item} className="group cursor-pointer">
                     <div className="aspect-video w-full rounded-lg overflow-hidden mb-2">
-                      <img
+                      <Image
+                      height={200}
+                      width={200}
                         src={`https://source.unsplash.com/random/800x600?sports=${item}`}
                         alt="Live Stream"
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
@@ -145,7 +186,6 @@ const Page = async ({ params }: Props) => {
                         <div className="flex items-center gap-1">
                           <Timer size={14} />
                           <span>1:30:00</span>
-                         
                         </div>
                       </div>
                     </div>
@@ -158,6 +198,6 @@ const Page = async ({ params }: Props) => {
       </div>
     </div>
   );
-}
+};
 
 export default Page;
