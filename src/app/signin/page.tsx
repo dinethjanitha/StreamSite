@@ -7,6 +7,7 @@ import ErrorMzg from '../components/ErrorMzg';
 import { useRouter } from 'next/navigation';
 import  {jwtDecode} from 'jwt-decode';
 import { CustomJwtPayload } from '@/types/jwt';
+import Link from 'next/link';
 
 const Page = () => {
 
@@ -130,16 +131,16 @@ const Page = () => {
 
             <button
               type="submit"
-              className="w-full flex items-center justify-center px-4 py-2.5 border border-transparent rounded-lg shadow-sm text-white bg-custom-orange hover:bg-custom-orange/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-orange transition-colors duration-200"
+              className="w-full flex items-center bg-[#F05922] justify-center px-4 py-2.5 border border-transparent rounded-lg shadow-sm text-white bg-custom-orange hover:bg-custom-orange/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-orange transition-colors duration-200"
             >
               Sign in
             </button>
 
             <p className="text-center text-sm text-gray-400">
               Don &apos;t have an account?{' '}
-              <a href="#" className="font-medium text-custom-orange hover:text-custom-orange/80">
+              <Link href="/signup" className="font-medium text-custom-orange hover:text-custom-orange/80">
                 Sign up
-              </a>
+              </Link>
             </p>
           </form>
         </div>

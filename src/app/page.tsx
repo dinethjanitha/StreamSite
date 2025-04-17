@@ -45,25 +45,25 @@ const Page = () => {
     <div className="min-h-screen bg-zinc-950 text-white">
 
       <section className="relative h-[80vh] overflow-hidden">
-        <div className="absolute inset-0">
+        <div className="absolute flex justify-center inset-0">
           <Image
             width={200}
             height={200}
             src="/2.png"
             alt="Sports"
-            className="w-full h-full  opacity-50"
+            className="w-[1000px] h-full  opacity-50"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent" />
         </div>
         
         <div className="relative max-w-7xl mx-auto h-full flex flex-col items-center justify-center text-center px-6">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-custom-orange">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl  font-bold mb-6 bg-clip-text  bg-gradient-to-r from-white to-custom-orange">
             STREAM YOUR FAVORITE SPORT
           </h1>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl">
+          <p className="text-xl text-[#D95c2d] mb-8 max-w-2xl">
             Watch live matches, tournaments, and exclusive sports content in one place
           </p>
-          <button className="group flex items-center gap-2 bg-custom-orange text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-custom-orange/90 transition-all duration-300">
+          <button className="group animate-bounce flex items-center gap-2 bg-custom-orange text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-custom-orange/90 transition-all duration-300">
             Watch Now
             <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
@@ -186,7 +186,7 @@ const Page = () => {
             height={200}
               src="/2.png"
               alt="About"
-              className="rounded-2xl"
+              className="rounded-2xl w-[500px]"
             />
             <div className="absolute -bottom-6 -right-6 bg-custom-orange p-6 rounded-2xl">
               <div className="text-4xl font-bold">10M+</div>

@@ -65,6 +65,9 @@ const NavBar = () => {
                   <a href="/live">LIVE</a>
                 </li>
                 <li>
+                  <a href="/live">STREAMS</a>
+                </li>
+                <li>
                   <Link href="/contact">Contact</Link>
                 </li>
                 <li>
@@ -73,13 +76,16 @@ const NavBar = () => {
               </ul>
             </div>
             <Link href="/" className="btn btn-ghost text-xl">
-              Steam{" "}
+              <span className=" text-[#F05922] text-2xl">Stream</span>Site
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <li>
                 <a href="/live">LIVE</a>
+              </li>
+              <li>
+                  <a href="/stream">STREAMS</a>
               </li>
               <li>
                 <Link href="/contact">Contact</Link>
@@ -93,17 +99,14 @@ const NavBar = () => {
             <ul className="menu menu-horizontal px-1">
               {decodedToken.length < 1 ? (
                 <li>
-                  <a>SignIn / SignUp</a>
+                  <Link href={"/signin"}>SignIn / SignUp</Link>
                 </li>
               ) : (
                 <li>
                   <details>
                     <summary>{decodedToken}</summary>
-                    <ul className="p-2 right-3 w-[200px]">
-                      <li>
-                        <a>Submenu 2</a>
-                      </li>
-                      <button className="btn" onClick={logout}>
+                    <ul className="p-2 right-3  flex justify-end">
+                      <button className="btn btn-sm" onClick={logout}>
                         Log out
                       </button>
                     </ul>

@@ -2,12 +2,15 @@
 import React, { useState } from "react";
 import { Mail, Lock, User } from "lucide-react";
 import axios from "axios";
+import ErrorMzg from "../components/ErrorMzg";
 
 const Signup = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMzg, setErrorMzg] = useState<string | null>(null);
 
 
   const signupPro = async (e : React.MouseEvent<HTMLButtonElement>) => {
@@ -26,6 +29,22 @@ const Signup = () => {
         
     }catch(error){
         console.log(error)
+        if (axios.isAxiosError(error) && error.response) {
+          console.log(error.response.data);
+          const errormzg = error.response.data;
+        if(errormzg.includes("E11000")){
+            console.log("Key duplicate")
+            setError(true)
+            setTimeout(() => {
+              setError(false)
+            },10000)
+
+            setErrorMzg("Email Already Exit!")
+        }
+        } else {
+          console.log(error);
+        }
+        
     }
   }
 
@@ -65,9 +84,14 @@ const Signup = () => {
         <div className="bg-zinc-900 rounded-xl p-8 shadow-xl">
           <form className="space-y-6">
             
-            <div>
+            <>
                 {success && <SuccessMessage mzg="Sign up successful please login now"/>}
-            </div>
+            </>
+
+
+            <>
+              {error && <ErrorMzg mzg={errorMzg || ""}/>}
+            </>
 
             <div className="space-y-2">
               <label htmlFor="name" className="block text-sm font-medium text-gray-300">
@@ -132,14 +156,14 @@ const Signup = () => {
             <button
 
                 onClick={signupPro}
-              className="w-full btn flex items-center justify-center px-4 py-2.5 border border-transparent rounded-lg shadow-sm text-white bg-custom-orange hover:bg-custom-orange/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-orange transition-colors duration-200"
+              className="w-full btn flex items-center  bg-[#F05922]justify-center px-4 py-2.5 border border-transparent rounded-lg shadow-sm text-white bg-custom-orange hover:bg-custom-orange/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-orange transition-colors duration-200"
             >
               Sign up
             </button>
 
             <p className="text-center text-sm text-gray-400">
               Already have an account?{" "}
-              <a href="/signin" className="font-medium text-custom-orange hover:text-custom-orange/80">
+              <a href="/signin" className="font-medium  text-custom-orange hover:text-custom-orange/80">
                 Sign in
               </a>
 
