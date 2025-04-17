@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Play, Trophy, Users, Timer, TrendingUp, ArrowRight } from 'lucide-react';
 import axios from 'axios';
+import Link from 'next/link';
 
 interface StreamProp {
+  _id : string,
   thumbnail : string,
   VideoLink : string,
   description : string,
@@ -63,10 +65,12 @@ const Page = () => {
           <p className="text-xl text-[#D95c2d] mb-8 max-w-2xl">
             Watch live matches, tournaments, and exclusive sports content in one place
           </p>
-          <button className="group animate-bounce flex items-center gap-2 bg-custom-orange text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-custom-orange/90 transition-all duration-300">
-            Watch Now
+         <Link href={"/stream"}>
+         <button className="group animate-bounce hover:shadow-sm hover:shadow-amber-50 flex items-center gap-2 bg-custom-orange text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-custom-orange/90 transition-all duration-300">
+            Watch Nows
             <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
+         </Link>
         </div>
       </section>
 
@@ -89,7 +93,8 @@ const Page = () => {
             </div>
             {
               live.length > 0 && (
-                <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
+                <Link href={`/watch/${live[0]._id}`}>
+                    <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
               <Image
               width={200}
               height={200}
@@ -107,6 +112,7 @@ const Page = () => {
                 <p className="text-gray-300">{live[0].description}</p>
               </div>
             </div>
+                </Link>
               )
             }
           </div>
@@ -124,7 +130,8 @@ const Page = () => {
             </div>
            {
             featured.length > 0 && (
-              <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
+              <Link href={`/watch/${featured[0]._id}`}>
+                  <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
               <Image
               width={200}
               height={200}
@@ -141,6 +148,7 @@ const Page = () => {
                 <h3 className="text-xl font-bold">Sport Center</h3>
               </div>
             </div>
+              </Link>
             )
            }
           </div>
@@ -155,7 +163,8 @@ const Page = () => {
             </div>
             {
               basketball.length > 0 && (
-                <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
+               <Link href={`/watch/${basketball[0]._id}`}>
+                 <div className="group relative overflow-hidden rounded-2xl bg-zinc-900">
               <Image
               width={200}
               height={200}
@@ -172,6 +181,7 @@ const Page = () => {
                 <h3 className="text-xl font-bold">LEAGUE MATCH</h3>
               </div>
             </div>
+               </Link>
               )
             }
           </div>

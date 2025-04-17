@@ -42,7 +42,7 @@ const Page = async ({ params }: Props) => {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white p-6">
+    <div className="min-h-screen bg-zinc-950 sm:p-5 text-white p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-9 space-y-4">
@@ -57,12 +57,12 @@ const Page = async ({ params }: Props) => {
               ></iframe>
             </div>
 
-            {/* Stream Info */}
+    
             <div className="space-y-4">
               <h1 className="text-2xl font-bold">{stream.title}</h1>
               <p className="text-gray-400">{stream.description}</p>
 
-              {/* Stream Stats */}
+        
               <div className="flex items-center gap-4 text-gray-400 text-sm">
                 <div className="flex items-center gap-2">
                   <Users size={16} />
@@ -72,7 +72,7 @@ const Page = async ({ params }: Props) => {
                 <span>Status: {stream.status.toUpperCase()}</span>
               </div>
 
-              {/* Actions */}
+   
               <div className="flex items-center gap-6 py-4 border-y border-zinc-800">
                 <button className="flex items-center gap-2 hover:text-custom-orange transition-colors">
                   <ThumbsUp className="w-6 h-6" />
@@ -91,7 +91,6 @@ const Page = async ({ params }: Props) => {
                 </button>
               </div>
 
-              {/* Team Scores */}
               <div className="bg-zinc-900 rounded-2xl p-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                   <Trophy className="w-5 h-5 text-custom-orange" />
@@ -117,16 +116,16 @@ const Page = async ({ params }: Props) => {
             </div>
           </div>
 
-          {/* Sidebar */}
+
           <div className="lg:col-span-3 space-y-6">
-            {/* Chat Section */}
+
             <div className="bg-zinc-900 rounded-2xl p-4 h-[400px] flex flex-col">
               <div className="flex items-center gap-2 mb-4">
                 <MessageSquare className="w-5 h-5 text-custom-orange" />
                 <h2 className="text-xl font-bold">Live Chat</h2>
               </div>
 
-              {/* Chat Messages */}
+
               <div className="flex-1 space-y-4 overflow-y-auto mb-4">
                 {[1, 2, 3].map((item) => (
                   <div key={item} className="flex items-start gap-3">
@@ -143,7 +142,6 @@ const Page = async ({ params }: Props) => {
                 ))}
               </div>
 
-              {/* Chat Input */}
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -156,7 +154,7 @@ const Page = async ({ params }: Props) => {
               </div>
             </div>
 
-            {/* Today's Streams */}
+
             <div className="bg-zinc-900 rounded-2xl p-4">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <Eye className="w-5 h-5 text-custom-orange" />
@@ -167,9 +165,9 @@ const Page = async ({ params }: Props) => {
                   <div key={item} className="group cursor-pointer">
                     <div className="aspect-video w-full rounded-lg overflow-hidden mb-2">
                       <Image
-                      height={200}
-                      width={200}
-                        src={`https://source.unsplash.com/random/800x600?sports=${item}`}
+                      height={400}
+                      width={400}
+                        src={`https://marketplace.canva.com/EAE6QwHsdTU/1/0/1600w/canva-red-football-highlight-youtube-thumbnail-r-l_62vMJqE.jpg`}
                         alt="Live Stream"
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                       />

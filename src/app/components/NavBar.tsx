@@ -24,7 +24,7 @@ const NavBar = () => {
     } catch (error) {
       console.error("Error decoding token:", error);
     }
-  }, []);
+  }, [path]);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -65,7 +65,7 @@ const NavBar = () => {
                   <a href="/live">LIVE</a>
                 </li>
                 <li>
-                  <a href="/live">STREAMS</a>
+                  <a href="/stream">STREAMS</a>
                 </li>
                 <li>
                   <Link href="/contact">CONTACTS</Link>

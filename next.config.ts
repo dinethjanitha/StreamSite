@@ -9,8 +9,9 @@ const nextConfig: NextConfig = {
       "streamback-production.up.railway.app",
       "st3.depositphotos.com",
       "localhost",
-      "unpkg.com",
-      "images.unsplash.com"
+      "source.unsplash.com",
+      "images.unsplash.com",
+      "marketplace.canva.com"
     ],
   },
 };

@@ -63,7 +63,7 @@ const Page = () => {
     }
 
   return (
-    <div className='bg-zinc-950 h-screen'>
+    <div className='bg-zinc-950 h-screen p-5'>
         <section className=' lg:w-[1200px]  lg:mx-auto '>
         <input type="text" className=' input w-full mb-5' onChange={handleChange} placeholder=' Search' />
 
