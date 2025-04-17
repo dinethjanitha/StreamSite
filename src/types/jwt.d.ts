@@ -1,7 +1,5 @@
-import 'jsonwebtoken';
+import { JwtPayload } from "jsonwebtoken";
 
-declare module 'jsonwebtoken' {
-  export interface JwtPayload {
-    name: string; // Add the 'name' property
-  }
+export interface CustomJwtPayload extends JwtPayload {
+  name: string;
 }

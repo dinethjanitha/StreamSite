@@ -1,6 +1,7 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { CustomJwtPayload } from "@/types/jwt";
 
 import { jwtDecode } from "jwt-decode";
 import Link from "next/link";
@@ -17,7 +18,7 @@ const NavBar = () => {
     try {
       const token = localStorage.getItem("token") || "";
       if (token) {
-        const decoded = jwtDecode(token);
+        const decoded = jwtDecode<CustomJwtPayload>(token);
         setDecodedToken(decoded.name || "");
       }
     } catch (error) {
