@@ -1,11 +1,69 @@
-import React from 'react';
+"use client"
+import React, { ChangeEvent, useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 import Image from 'next/image';
+import axios from 'axios';
+import SuccessMzg from '../components/SuccessMzg';
+import ErrorMzg from '../components/ErrorMzg';
+
+interface ContactForm {
+  name : string,
+  email:string,
+  subject : string,
+  message : string
+}
 
 const ContactPage = () => {
+
+  const [contactFromData , setContactFormData] = useState<ContactForm>({
+    name : "",
+    email:"",
+    subject : "",
+    message : ""
+  })
+
+  const [success , setSuccess] = useState<boolean>(false)
+  const [error , SetError] = useState<boolean>(false)
+
+
+  const handleInputs = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const data = e.target.value;
+      const field = e.target.name;
+
+      console.log(data);
+      console.log(field);
+
+      setContactFormData((prevData) => {
+        return {
+          ...prevData,
+          [field]: data,
+        };
+      });
+  }
+
+  console.log(contactFromData)
+
+  const handleSubmit = async (e: React.MouseEvent) => {
+    e.preventDefault();
+      try{
+        const response = await axios.post("http://localhost:3005/api/v1/contact" , contactFromData)
+
+        console.log(response)
+
+        SetError(false)
+        setSuccess(true)
+        setTimeout(()=>{
+          setSuccess(false)
+        },5000)
+      }catch(error){
+        setSuccess(false)
+        SetError(true)
+        console.log(error)
+      }
+  }
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
-   
       <section className="relative h-[40vh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -30,8 +88,11 @@ const ContactPage = () => {
 
       <section className="max-w-7xl mx-auto py-16 px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
+   
+          
           <div className="bg-zinc-900 p-8 rounded-2xl">
+          {success && <SuccessMzg mzg='Message send successfull!'/>}
+          {error && <ErrorMzg mzg='Message said faild!'/>}
             <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -39,6 +100,9 @@ const ContactPage = () => {
                   <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
                   <input
                     type="text"
+                    name='name'
+                    required
+                    onChange={handleInputs}
                     className="w-full bg-zinc-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-custom-orange"
                     placeholder="Your name"
                   />
@@ -47,6 +111,9 @@ const ContactPage = () => {
                   <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
                   <input
                     type="email"
+                    name='email'
+                    required
+                    onChange={handleInputs}
                     className="w-full bg-zinc-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-custom-orange"
                     placeholder="your@email.com"
                   />
@@ -56,6 +123,9 @@ const ContactPage = () => {
                 <label className="block text-sm font-medium text-gray-300 mb-2">Subject</label>
                 <input
                   type="text"
+                  name='subject'
+                  required
+                  onChange={handleInputs}
                   className="w-full bg-zinc-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-custom-orange"
                   placeholder="How can we help?"
                 />
@@ -64,12 +134,15 @@ const ContactPage = () => {
                 <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
                 <textarea
                   rows={6}
+                  name='message'
+                  required
+                  onChange={handleInputs}
                   className="w-full bg-zinc-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-custom-orange"
                   placeholder="Your message..."
                 />
               </div>
               <button
-                type="submit"
+                onClick={handleSubmit}
                 className="w-full bg-custom-orange hover:bg-custom-orange/90 text-white font-semibold py-4 rounded-lg flex items-center justify-center gap-2 transition-colors"
               >
                 Send Message
